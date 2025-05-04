@@ -1,5 +1,6 @@
 import vlc
 import time
+import os
 
 # URL of the M3U8 stream
 YLE_TV1 = "https://yletv.akamaized.net/hls/live/622365/yletv1fin/playlist.m3u8"
@@ -7,8 +8,21 @@ YLE_TV1 = "https://yletv.akamaized.net/hls/live/622365/yletv1fin/playlist.m3u8"
 def main():
     """Plays the specified M3U8 stream using VLC."""
     try:
-        # Create a VLC instance
-        instance = vlc.Instance('--fullscreen')
+        # Set the DISPLAY environment variable explicitly if needed
+        # This helps VLC find the display server
+        if 'DISPLAY' not in os.environ:
+            os.environ['DISPLAY'] = ':0'
+
+        # Create a VLC instance with Raspberry Pi optimized parameters
+        vlc_args = [
+            '--fullscreen',                # Enable fullscreen mode
+            '--no-video-title-show',       # Hide the video title
+            '--vout=mmal_vout',            # Use the Pi's hardware video output
+            '--avcodec-hw=any',            # Enable hardware acceleration
+            '--aout=alsa'                  # Use ALSA for audio output
+        ]
+        
+        instance = vlc.Instance(*vlc_args)
 
         # Create a MediaPlayer object
         player = instance.media_player_new()
