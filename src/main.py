@@ -16,10 +16,7 @@ def main():
         # Create a VLC instance with Raspberry Pi optimized parameters
         vlc_args = [
             '--fullscreen',                # Enable fullscreen mode
-            '--no-video-title-show',       # Hide the video title
-            '--vout=mmal_vout',            # Use the Pi's hardware video output
-            '--avcodec-hw=any',            # Enable hardware acceleration
-            '--aout=alsa'                  # Use ALSA for audio output
+            '--no-video-title-show'       # Hide the video title
         ]
         
         instance = vlc.Instance(*vlc_args)
