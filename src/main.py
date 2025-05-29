@@ -16,7 +16,14 @@ def main():
         # Create a VLC instance with Raspberry Pi optimized parameters
         vlc_args = [
             '--fullscreen',                # Enable fullscreen mode
-            '--no-video-title-show'       # Hide the video title
+            '--no-video-title-show',      # Hide the video title
+            '--intf', 'dummy',            # Use dummy interface (no GUI)
+            '--extraintf', 'http',        # Enable HTTP interface for control
+            '--no-osd',                   # Disable on-screen display
+            '--video-on-top',             # Keep video on top
+            '--no-video-deco',            # Remove window decorations
+            '--no-embedded-video',        # Don't embed video in interface
+            '--vout', 'gl'               # Use OpenGL output (good for Pi 5)
         ]
         
         instance = vlc.Instance(*vlc_args)
@@ -35,6 +42,12 @@ def main():
 
         print(f"Playing stream: {YLE_TV1}")
         print("Press Ctrl+C to stop.")
+
+        # Wait for media to start playing before setting fullscreen
+        time.sleep(2)
+        
+        # Force fullscreen after playback starts
+        player.set_fullscreen(True)
 
         # Keep the script running while the video plays
         while True:
