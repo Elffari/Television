@@ -1,9 +1,10 @@
 import vlc
 import time
 import os
+from channels import channels
 
 # URL of the M3U8 stream
-YLE_TV1 = "https://yletv.akamaized.net/hls/live/622365/yletv1fin/playlist.m3u8"
+chosen_channel = channels["Yle TV1"]
 
 def main():
     """Plays the specified M3U8 stream using VLC."""
@@ -32,7 +33,7 @@ def main():
         player = instance.media_player_new()
 
         # Create a Media object from the URL
-        media = instance.media_new(YLE_TV1)
+        media = instance.media_new(chosen_channel)
 
         # Set the media for the player
         player.set_media(media)
@@ -40,7 +41,7 @@ def main():
         # Start playing the media
         player.play()
 
-        print(f"Playing stream: {YLE_TV1}")
+        print(f"Playing stream: {chosen_channel}")
         print("Press Ctrl+C to stop.")
 
         # Wait for media to start playing before setting fullscreen
