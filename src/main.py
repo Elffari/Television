@@ -1,4 +1,4 @@
-import vlc
+import vlc_helper
 import time
 import os
 from channels import channels

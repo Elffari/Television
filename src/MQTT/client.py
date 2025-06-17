@@ -1,12 +1,13 @@
 import ssl
 import time
 import config
+from src.device import Device
 
 from paho.mqtt.client import Client, CallbackAPIVersion
 from urllib.parse import urlparse
 
 mqtt_client = Client(CallbackAPIVersion.VERSION2)
-# device = entertainment.Hub(mqtt)
+device = Device(mqtt_client)
 
 def on_connect(mqtt, obj, flags, reason_code, properties):
     if reason_code == 0:
@@ -34,7 +35,7 @@ def on_message(mqtt, obj, msg):
         print("Server says:", payload)
     else:
         print(f"Got {topic}, value: {payload}")
-        # device.process_message(topic, payload)
+        device.process_message(topic, payload)
 
 def main():
     mqtt_client.tls_set(tls_version=ssl.PROTOCOL_TLSv1_2)
