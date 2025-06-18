@@ -13,7 +13,7 @@ def on_connect(mqtt, obj, flags, reason_code, properties):
     if reason_code == 0:
         print("Connected [secure]")
         mqtt.subscribe("downlink/#", qos=0)
-        # device.connected()
+        device.connected()
     elif reason_code == "Bad user name or password":
         print("Invalid BLYNK_AUTH_TOKEN")
         mqtt.disconnect()

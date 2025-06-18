@@ -9,7 +9,7 @@ class Device:
 
     def connected(self):
         # Get latest settings from Blynk.Cloud
-        self.mqtt.publish("get/ds", "TV Power, TV Volume, TV Channel")
+        self.mqtt.publish("get/ds", "TV Power,TV Volume,TV Channel")
 
     def process_message(self, topic, payload):
         # Handle TV power
@@ -25,16 +25,13 @@ class Device:
             try:
                 volume = int(payload)
                 self.television.set_volume(volume)
-                print(f"TV volume set to {volume}.")
             except ValueError as e:
                 print(f"Error setting TV volume: {e}")
 
         # Handle TV channel
         elif topic == "downlink/ds/TV Channel":
             try:
-                channel = int(payload)
-                self.television.change_channel(channel)
-                print(f"TV channel changed to {channel}.")
+                self.television.change_channel(payload)
             except ValueError as e:
                 print(f"Error changing TV channel: {e}")
 

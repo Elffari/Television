@@ -6,14 +6,13 @@ import time
 class Television:
     def __init__(self):
         self.volume = 50
-        self.current_channel_name = "Yle TV1" # Store channel name
+        self.current_channel = "1" # Default channel index
         self.is_on = False # Track power state
         self.player = None
-        # self.channels = channels # Assuming 'channels' is defined globally or passed in
 
     def turn_on(self):
         if self.is_on and self.player and self.player.is_playing():
-            print(f"TV is already on and playing {self.current_channel_name}.")
+            print(f"TV is already on and playing.")
             return
 
         if self.player: # Stop existing player if any
@@ -21,9 +20,9 @@ class Television:
             self.player.release() # Release the player instance
             self.player = None
 
-        channel_url = channels.get(self.current_channel_name)
+        channel_name, channel_url = channels.get(self.current_channel)
         if not channel_url:
-            print(f"Channel URL for {self.current_channel_name} not found.")
+            print(f"Channel URL for {channel_name} not found.")
             self.is_on = False
             return
 
@@ -31,7 +30,7 @@ class Television:
 
         if self.player:
             self.player.play()
-            print(f"Playing stream: {self.current_channel_name}")
+            print(f"Playing stream: {channel_name}")
             self.is_on = True
             # Set volume (VLC player might reset volume on new media)
             self.player.audio_set_volume(self.volume)
@@ -42,7 +41,7 @@ class Television:
             if self.player.is_playing():
                  self.player.set_fullscreen(True)
         else:
-            print(f"Failed to turn on TV for channel {self.current_channel_name}.")
+            print(f"Failed to turn on TV for channel {channel_name}.")
             self.is_on = False
 
     def turn_off(self):
@@ -53,20 +52,35 @@ class Television:
         self.is_on = False
         print("TV turned off.")
 
-    def change_channel(self, new_channel_name):
-        if new_channel_name not in channels:
-            print(f"Channel {new_channel_name} not found.")
+    def change_channel(self, payload: str):
+        # Check if the TV is on before changing channels
+        if not self.is_on:
+            print("TV is off. Please turn it on first.")
             return
 
-        self.current_channel_name = new_channel_name
-        print(f"Changing channel to {self.current_channel_name}.")
-        if self.is_on:
-            # Turn "off" (stop current stream) and then "on" (start new stream)
-            self.turn_on() # This will stop current and start new
-        else:
-            # If TV is off, just set the channel, it will be used when turned on
-            print(f"TV is off. Channel set to {self.current_channel_name}. Turn TV on to watch.")
+        # Check if player instance exists
+        if not self.player:
+            print("No player instance available. Cannot change channel.")
+            return
 
+        try:
+            # Use .get() for a safe lookup
+            channel_data = channels.get(payload)
+
+            if channel_data:
+                channel_name, url = channel_data
+                print(f"Changing to channel: {channel_name}")
+
+                success = vlc_helper.change_channel(self.player, url)
+
+                if success:
+                    print(f"Now playing: {channel_name}")
+                else:
+                    print("Failed to change channel.")
+            else:
+                print(f"Channel {payload} not found in the channel list.")
+        except (KeyError, IndexError):
+            print(f"Invalid channel index: {payload}")
 
     def set_volume(self, volume_level):
         if 0 <= volume_level <= 100:
@@ -83,6 +97,6 @@ class Television:
         if self.is_on and self.player:
             state = self.player.get_state()
             if state == vlc.State.Ended or state == vlc.State.Error:
-                print(f"Playback for {self.current_channel_name} ended or encountered an error.")
+                print(f"Playback ended or encountered an error.")
                 self.turn_off() # Or attempt to restart, etc.
         # This method would need to be called from your main application loop.
