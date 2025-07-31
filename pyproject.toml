@@ -1,0 +1,9 @@
+[project]
+name = "television"
+version = "0.1.0"
+description = "Television program (finnish channels) for Raspberry Pi 5 controlled with VLC and MQTT (Blynk)"
+requires-python = ">=3.13"
+dependencies = [
+    "paho-mqtt>=2.1.0",
+    "python-vlc>=3.0.21203",
+]

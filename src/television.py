@@ -5,7 +5,7 @@ import time
 
 class Television:
     def __init__(self):
-        self.volume = 50
+        self.volume = 100
         self.current_channel = "1" # Default channel index
         self.is_on = False # Track power state
         self.player = None
