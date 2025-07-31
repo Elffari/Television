@@ -4,7 +4,7 @@ import os
 from channels import channels
 
 # URL of the M3U8 stream
-chosen_channel = channels["Yle TV1"]
+chosen_channel = channels["1"]
 
 def main():
     """Plays the specified M3U8 stream using VLC."""
