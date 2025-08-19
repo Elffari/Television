@@ -23,4 +23,5 @@ channels = {
     "97": ("Järviradio", "https://streamer.radiotaajuus.fi/memfs/47f113bf-04ea-493b-a9d4-52945fd9db31.m3u8"),
     "98": ("MTV Uutiset", "https://live.streaming.a2d.tv/asset/20025962.isml/.m3u8"),
 #    "99": ("YleX", "https://ylestudiolive.akamaized.net/hls/live/2007826/ylestudiolive-YleX/master.m3u8")
+    "24": ("Lumiukko", "Assets/Videos/Lumiukko.mkv")
 }
