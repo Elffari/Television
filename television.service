@@ -1,0 +1,16 @@
+[Unit]
+Description=Television startup service
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=elffari
+WorkingDirectory=/home/elffari/Television
+ExecStart=uv run src/client.py
+
+[Install]
+WantedBy=multi-user.target
