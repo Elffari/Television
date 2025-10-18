@@ -15,10 +15,6 @@ class Device:
         # Handle TV power
         if topic == "downlink/ds/TV Power":
             self.handle_power_command(payload)
-            if payload == "1":
-                self.television.turn_on()
-            elif payload == "0":
-                self.television.turn_off()
 
         # Handle TV volume
         elif topic == "downlink/ds/TV Volume":
@@ -48,9 +44,9 @@ class Device:
         pass
 
     def handle_power_command(self, payload):
-        if payload == 1:
+        if payload == "1":
             self.television.turn_on()
             print("TV turned on.")
-        elif payload == 0:
+        elif payload == "0":
             self.television.turn_off()
             print("TV turned off.")
