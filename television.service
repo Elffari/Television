@@ -10,7 +10,7 @@ Restart=always
 RestartSec=1
 User=elffari
 WorkingDirectory=/home/elffari/Television
-ExecStart=/home/elffari/.local/bin/uv run python -m src.client
+ExecStart=/home/elffari/.local/bin/uv run -- python -m src.client
 
 [Install]
 WantedBy=multi-user.target
