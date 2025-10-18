@@ -16,6 +16,7 @@ def initialize_vlc_player(channel_url):
         '--no-video-deco',
         '--no-embedded-video',
         '--vout', 'gl',
+        '--codec', 'avcodec',
         '--avcodec-hw=none'
     ]
     try:
