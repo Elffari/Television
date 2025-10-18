@@ -1,5 +1,5 @@
-from channels import *
-import vlc_helper
+from .channels import *
+from . import vlc_helper
 import vlc
 import time
 

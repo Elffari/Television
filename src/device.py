@@ -1,4 +1,4 @@
-from television import Television
+from .television import Television
 
 class Device:
     power_on = False
