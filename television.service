@@ -1,6 +1,6 @@
 [Unit]
 Description=Television startup service
-After=network-online.target
+After=network-online.target sound.target
 Wants=network-online.target
 StartLimitIntervalSec=0
 
@@ -10,6 +10,9 @@ Restart=always
 RestartSec=1
 User=elffari
 WorkingDirectory=/home/elffari/Television
+Environment="DISPLAY=:0"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+SupplementaryGroups=audio video
 ExecStart=/home/elffari/.local/bin/uv run -- python -m src.client
 
 [Install]
