@@ -21,3 +21,5 @@ BLYNK_MQTT_BROKER   = "blynk.cloud"
 #sgp1.blynk.cloud – Singapore
 #blr1.blynk.cloud – Bangalore
 ```
+
+## Move Systemd Service file to /etc/systemd/system

@@ -1,7 +1,7 @@
 import ssl
 import time
-import config
-from device import Device
+from . import config
+from .device import Device
 
 from paho.mqtt.client import Client, CallbackAPIVersion
 from urllib.parse import urlparse

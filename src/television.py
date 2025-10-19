@@ -1,5 +1,5 @@
-from channels import *
-import vlc_helper
+from .channels import *
+from . import vlc_helper
 import vlc
 import time
 
@@ -38,8 +38,11 @@ class Television:
             # Handle fullscreen. This might need to be threaded if non-blocking.
             # For simplicity, direct call here.
             time.sleep(2) # Allow player to initialize
-            if self.player.is_playing():
-                 self.player.set_fullscreen(True)
+            try:
+                if self.player.is_playing():
+                    self.player.set_fullscreen(True)
+            except Exception as e:
+                print(f"Error setting fullscreen: {e}")
         else:
             print(f"Failed to turn on TV for channel {channel_name}.")
             self.is_on = False
