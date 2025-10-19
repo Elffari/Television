@@ -15,7 +15,9 @@ def initialize_vlc_player(channel_url):
         '--video-on-top',
         '--no-video-deco',
         '--no-embedded-video',
-        '--vout', 'gl'
+        '--vout', 'gl',
+        '--codec', 'avcodec',
+        '--avcodec-hw=none'
     ]
     try:
         instance = vlc.Instance(*vlc_args)
