@@ -1,5 +1,6 @@
 from .channels import *
 from . import vlc_helper
+import os
 import vlc
 import time
 
@@ -103,3 +104,33 @@ class Television:
                 print(f"Playback ended or encountered an error.")
                 self.turn_off() # Or attempt to restart, etc.
         # This method would need to be called from your main application loop.
+
+    def play_sequence(self, media_files):
+        """
+        Plays a sequence of media files one after another.
+        
+        Args:
+            media_files: List of file paths to play in sequence
+        """
+        if not self.player:
+            print("No player instance available.")
+            return
+        
+        for media_file in media_files:
+            if not os.path.exists(media_file):
+                print(f"Media file not found: {media_file}")
+                continue
+                
+            try:
+                instance = self.player.get_instance()
+                media = instance.media_new(media_file)
+                self.player.set_media(media)
+                self.player.play()
+                
+                # Wait for the media to finish playing
+                while self.player.get_state() not in [vlc.State.Ended, vlc.State.Error, vlc.State.Stopped]:
+                    time.sleep(0.1)
+                    
+                print(f"Finished playing: {media_file}")
+            except Exception as e:
+                print(f"Error playing {media_file}: {e}")
