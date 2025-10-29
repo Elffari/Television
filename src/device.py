@@ -1,4 +1,5 @@
 import threading
+import random
 from .television import Television
 
 class Device:
