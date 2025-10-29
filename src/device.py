@@ -55,7 +55,7 @@ class Device:
                 print(f"Error changing TV channel: {e}")
 
         # Handle Phone call
-        elif topic == "downlink/ds/ring":
+        elif topic == "downlink/ds/Ring":
             # Play sounds in background thread
             threading.Thread(target=self._play_phone_sequence, daemon=True).start()
 
