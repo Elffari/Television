@@ -1,3 +1,4 @@
+import threading
 from .television import Television
 
 class Device:
@@ -10,6 +11,27 @@ class Device:
     def connected(self):
         # Get latest settings from Blynk.Cloud
         self.mqtt.publish("get/ds", "TV Power,TV Volume,TV Channel")
+
+    def _play_phone_sequence(self):
+        """Plays ring sound followed by random kid sound in a separate thread"""
+        try:
+            ring_sound = "src/Assets/Ring/puhelin2.mp3"
+            kid_sounds_dir = "src/Assets/Kids"
+            
+            kid_sounds = [
+                os.path.join(kid_sounds_dir, f) 
+                for f in os.listdir(kid_sounds_dir)
+                if f.endswith(('.mp3', '.wav', '.m4a'))
+            ]
+            
+            sounds_to_play = [ring_sound]
+            if kid_sounds:
+                sounds_to_play.append(random.choice(kid_sounds))
+            
+            self.television.play_sequence(sounds_to_play)
+            
+        except Exception as e:
+            print(f"Phone sequence error: {e}")
 
     def process_message(self, topic, payload):
         # Handle TV power
@@ -30,6 +52,11 @@ class Device:
                 self.television.change_channel(payload)
             except ValueError as e:
                 print(f"Error changing TV channel: {e}")
+
+        # Handle Phone call
+        elif topic == "downlink/ds/ring":
+            # Play sounds in background thread
+            threading.Thread(target=self._play_phone_sequence, daemon=True).start()
 
         # Handle unknown topics
         else:
