@@ -23,5 +23,13 @@ channels = {
     "97": ("Järviradio", "https://streamer.radiotaajuus.fi/memfs/47f113bf-04ea-493b-a9d4-52945fd9db31.m3u8"),
     "98": ("MTV Uutiset", "https://live.streaming.a2d.tv/asset/20025962.isml/.m3u8"),
 #    "99": ("YleX", "https://ylestudiolive.akamaized.net/hls/live/2007826/ylestudiolive-YleX/master.m3u8")
-    "24": ("Lumiukko", "src/Assets/Videos/Lumiukko.mkv")
+    "24": ("Lumiukko", "src/Assets/Videos/Lumiukko.mkv"),
+    "25": ("Jouluradio", "https://aud-stream-jouluradio01.nm-elemental.nelonenmedia.fi/master.m3u8"),
+    "26": ("Julradio", "https://aud-stream-jouluradio02.nm-elemental.nelonenmedia.fi/master.m3u8"),
+    "27": ("Kauneimmat Joululaulut", "https://aud-stream-jouluradio03.nm-elemental.nelonenmedia.fi/master.m3u8"),
+    "28": ("Lasten Jouluradio", "https://aud-stream-jouluradio04.nm-elemental.nelonenmedia.fi/master.m3u8"),
+    "29": ("PopJoulu", "https://aud-stream-jouluradio05.nm-elemental.nelonenmedia.fi/master.m3u8"),
+    "30": ("Rouhea Joulu", "https://aud-stream-jouluradio06.nm-elemental.nelonenmedia.fi/master.m3u8"),
+    "31": ("Klassinen Joulu", "https://aud-stream-jouluradio07.nm-elemental.nelonenmedia.fi/master.m3u8"),
+    "32": ("Happy Holidays", "https://aud-stream-jouluradio08.nm-elemental.nelonenmedia.fi/master.m3u8"),
 }
