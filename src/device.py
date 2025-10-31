@@ -28,8 +28,11 @@ class Device:
             
             sounds_to_play = [ring_sound]
             if kid_sounds:
-                sounds_to_play.append(random.choice(kid_sounds))
-            
+                random_kid_sound = random.choice(kid_sounds)
+                sounds_to_play.append(random_kid_sound)
+                print(f"Playing kid sound: {random_kid_sound}")
+
+            print(f"Sound sequence to play: {sounds_to_play}")
             self.television.play_sequence(sounds_to_play)
             
         except Exception as e:
