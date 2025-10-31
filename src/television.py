@@ -100,9 +100,12 @@ class Television:
     def check_player_status(self):
         if self.is_on and self.player:
             state = self.player.get_state()
-            if state == vlc.State.Ended or state == vlc.State.Error:
-                print(f"Playback ended or encountered an error.")
-                self.turn_off() # Or attempt to restart, etc.
+            if state == vlc.State.Error:
+                print(f"Playback encountered an error. Shutting down TV.")
+                self.turn_off()
+            elif state == vlc.State.Ended:
+                print(f"Playback ended normally.")
+                # Don't turn off - TV stays on
         # This method would need to be called from your main application loop.
 
     def play_sequence(self, media_files):
