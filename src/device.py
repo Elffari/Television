@@ -60,8 +60,10 @@ class Device:
 
         # Handle Phone call
         elif topic == "downlink/ds/Ring":
-            # Play sounds in background thread
-            threading.Thread(target=self._play_phone_sequence, daemon=True).start()
+            # Only play when button is pressed (value "1"), not when released (value "0")
+            if payload == "1":
+                # Play sounds in background thread
+                threading.Thread(target=self._play_phone_sequence, daemon=True).start()
 
         # Handle unknown topics
         else:
