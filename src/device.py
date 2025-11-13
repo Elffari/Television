@@ -20,6 +20,7 @@ class Device:
             ring_sound = "src/Assets/Ring/puhelin2.mp3"
             bells = "src/Assets/Ring/Kulkuset.wav"
             voicemail = "src/Assets/Ring/Vastaaja.m4a"
+            beep = "src/Assets/Ring/beep.mp3"
             kid_sounds_dir = "src/Assets/Kids"
             
             kid_sounds = [
@@ -28,7 +29,7 @@ class Device:
                 if f.endswith(('.mp3', '.wav', '.m4a'))
             ]
             
-            sounds_to_play = [ring_sound, bells, voicemail]
+            sounds_to_play = [ring_sound, bells, voicemail, beep]
             if kid_sounds:
                 random_kid_sound = random.choice(kid_sounds)
                 sounds_to_play.append(random_kid_sound)
