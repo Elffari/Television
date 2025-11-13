@@ -18,7 +18,7 @@ class Device:
         """Plays ring sound followed by random kid sound in a separate thread"""
         try:
             ring_sound = "src/Assets/Ring/puhelin2.mp3"
-            bells = "src/Assets/Ring/Kulkuset.mp3"
+            bells = "src/Assets/Ring/Kulkuset.wav"
             voicemail = "src/Assets/Ring/Vastaaja.m4a"
             kid_sounds_dir = "src/Assets/Kids"
             
